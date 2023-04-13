@@ -15,7 +15,7 @@ struct AuthButton: View {
        var buttonColor: Color = Color(hex: "#011223")
        var textColor: Color = .white
        var screen = UIScreen.main.bounds.size
-       var disabled = false;
+       var disabled: Bool;
        
        var body: some View {
            Button(action: {
@@ -29,11 +29,11 @@ struct AuthButton: View {
                        .frame(width: screen.width * 0.85, alignment: .leading)
                        .foregroundColor(textColor)
                        .padding()
-                       .background(isPressed ? Color.gray : buttonColor)
+                       .background(disabled ? Color.gray : buttonColor)
                        .cornerRadius(30)
                    
                     Image(systemName: "chevron.right")
-                       .foregroundColor( !disabled ? .white : .black )
+                       .foregroundColor( disabled ?  .black : .white )
                        .padding(.trailing)
                        
                }
@@ -43,6 +43,6 @@ struct AuthButton: View {
 struct AuthButton_Previews: PreviewProvider {
     static var previews: some View {
         
-        AuthButton(callback: {})
+        AuthButton(callback: {}, disabled: false)
     }
 }

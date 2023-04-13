@@ -9,18 +9,17 @@ import SwiftUI
 
 struct Input: View {
     var placeholder: String
-    var error: Bool
     var TextError: String
     
     var secure: Bool;
     
     @State var visiblePass: Bool
     @Binding var text: String
+
     
-    
-    init(placeholder: String, error: Bool, TextError: String, secure: Bool, text: Binding<String>) {
+
+    init(placeholder: String, TextError: String, secure: Bool, text: Binding<String>) {
         self.placeholder = placeholder
-        self.error = error
         self.TextError = TextError
         _text = text
         self.secure = secure
@@ -28,9 +27,8 @@ struct Input: View {
     }
     
     
-    init(placeholder: String, error: Bool, TextError: String, text: Binding<String>) {
+    init(placeholder: String, TextError: String, text: Binding<String>) {
         self.placeholder = placeholder
-        self.error = error
         self.TextError = TextError
         _text = text
         self.secure = false
@@ -66,14 +64,11 @@ struct Input: View {
                         TextField("", text: $text)
                             .padding(.leading, 30)
                             .foregroundColor(.black)
-                            .onChange(of: text) { newValue in
-                                print("new value", newValue)
-                            }
+        
 
                     }
                     
                 }
-                
                 
                 if !secure {
                     Image(systemName: "envelope")
@@ -99,17 +94,17 @@ struct Input: View {
             }
         }.padding(.top, 10)
         
-        if  error {
+      
             HStack {
                 Spacer()
                 Text(TextError)
                 .font(.system(size: 12))
                 .foregroundColor(.red)
                 .padding(.trailing)
-                .padding(.top, -12)
+                .padding(.top, -2)
             }
         }
-    }
+    
    
 }
 
