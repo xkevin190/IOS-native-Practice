@@ -9,60 +9,83 @@ import SwiftUI
 
 struct CustomAlert: View {
     var screen = UIScreen.main.bounds.size
-
-    var email: String;
+    
     var action: ()-> Void
+    var back: (()-> Void)?
+    var title: String
+    var message: String
+    
     var body: some View {
         
         ZStack {
             VStack(spacing: 25){
-                Text("No te encuentras registrado")
+                Text(title)
                     .foregroundColor(Colors.primary)
                     .font(.system(size: 23))
                     .padding(.top, 20)
                     .padding(.horizontal, 15)
                 
-                Text("Tu correo ''\(email)'' no se encuentra registrado. Verifica si es un correo corporativo o si tiene algún error. Tambien puedes registrarte si tiene un Código QR")
+                Text(message)
                     .foregroundColor(.white)
                     .multilineTextAlignment(.center)
                     .font(.system(size: 18))
                     .padding(.horizontal)
                 
-    
-                HStack {
-                    Button(action: {
-                        action()
-                    }, label: {
-                        Text("Regresar")
-                            .padding(.horizontal, 35)
-                            .padding(.vertical, 12)
-                    })
-                    .foregroundColor(Colors.primary)
-                    .background(Colors.Background)
-                    .cornerRadius(2)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 2)
-                            .stroke(Colors.primary, lineWidth: 1)
-                    )
-                    .padding(.leading, 20)
-                    .padding(.trailing, 7)
-                    
-                    
-                    
-                    Button(action: {}, label: {
-                        Text("Registrate")
-                            .padding(.horizontal, 35)
-                            .padding(.vertical, 12)
+                // MARK - double buttons
+                if back != nil {
+                    HStack {
+                        Button(action: {
+                            back!()
+                        }, label: {
+                            Text("Regresar")
+                                .padding(.horizontal, 35)
+                                .padding(.vertical, 12)
+                        })
+                        .foregroundColor(Colors.primary)
+                        .background(Colors.Background)
+                        .cornerRadius(2)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 2)
+                                .stroke(Colors.primary, lineWidth: 1)
+                        )
+                        .padding(.leading, 20)
+                        .padding(.trailing, 7)
                         
-                    })
-                    .foregroundColor(.black)
-                    .background(Colors.primary)
-                    .padding(.trailing, 20)
-                    .padding(.leading, 7)
-                    .cornerRadius(3)
+                        
+                        
+                        Button(action: {
+                            action()
+                        }, label: {
+                            Text("Registrate")
+                                .padding(.horizontal, 35)
+                                .padding(.vertical, 12)
+                            
+                        })
+                        .foregroundColor(.black)
+                        .background(Colors.primary)
+                        .padding(.trailing, 20)
+                        .padding(.leading, 7)
+                        .cornerRadius(3)
+                    }
+                    .padding(.bottom)
                 }
-                .padding(.bottom)
                 
+                if  back == nil {
+                    HStack {
+                        Button(action: {
+                            action()
+                        }, label: {
+                            Text("Continuar")
+                                .padding(.horizontal, 35)
+                                .padding(.vertical, 12)
+                            
+                        })
+                        .frame(width: screen.width * 0.8)
+                        .foregroundColor(.black)
+                        .background(Colors.primary)
+                        .cornerRadius(20)
+                    }
+                }
                 
             }
             .frame(width: screen.width * 0.94)
@@ -86,7 +109,7 @@ struct CustomAlert: View {
 
 struct CustomAlert_Previews: PreviewProvider {
     static var previews: some View {
-        CustomAlert(email: "kevin@test.com", action: {})
+        CustomAlert(action: {}, title: "Xtitulo", message: "In SwiftUI, you can use an optional callback to handle user interactions or events that occur within a view. An optional callback is a closure that is passed as a parameter to a view and can be executed when an")
     }
 }
 
@@ -94,7 +117,7 @@ struct CustomAlert_Previews: PreviewProvider {
 struct BlurView : UIViewRepresentable {
     func updateUIView(_ uiView: UIViewType, context: Context) {}
     
-   
+    
     func makeUIView(context: Context) -> some UIView {
         let view = UIVisualEffectView(effect: UIBlurEffect(style: .systemUltraThinMaterial))
         

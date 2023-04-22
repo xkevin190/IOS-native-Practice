@@ -9,7 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Login()
+        Login().onTapGesture {
+            UIApplication.shared.endEditing()
+        }
+
     }
 }
 

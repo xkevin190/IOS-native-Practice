@@ -10,14 +10,14 @@ import SwiftUI
 struct Input: View {
     var placeholder: String
     var TextError: String
-    
+    var Icon: String?
     var secure: Bool;
     
     @State var visiblePass: Bool
     @Binding var text: String
-
     
-
+    
+    
     init(placeholder: String, TextError: String, secure: Bool, text: Binding<String>) {
         self.placeholder = placeholder
         self.TextError = TextError
@@ -34,7 +34,17 @@ struct Input: View {
         self.secure = false
         self.visiblePass = true;
     }
-
+    
+    
+    init(placeholder: String, TextError: String, text: Binding<String>, icon: String) {
+        self.placeholder = placeholder
+        self.TextError = TextError
+        _text = text
+        self.secure = false
+        self.visiblePass = true;
+        self.Icon = icon
+    }
+    
     
     var body: some View {
         ZStack(alignment: .trailing) {
@@ -52,8 +62,8 @@ struct Input: View {
                             .foregroundColor(.gray)
                             .padding(.leading, 30)
                             .padding(.bottom, -1)
-                            
-                            
+                        
+                        
                     }
                     
                     if !visiblePass {
@@ -64,19 +74,18 @@ struct Input: View {
                         TextField("", text: $text)
                             .padding(.leading, 30)
                             .foregroundColor(.black)
-        
-
+                        
+                        
                     }
                     
                 }
                 
-                if !secure {
-                    Image(systemName: "envelope")
+                if !secure && Icon != nil {
+                    Image(systemName: Icon!)
                         .renderingMode(.template)
                         .padding(.trailing, 30)
                         .foregroundColor(.blue)
-                } else {
-                    
+                } else if (secure) {
                     
                     Button(action: {
                         visiblePass.toggle()
@@ -92,19 +101,20 @@ struct Input: View {
                 
                 
             }
-        }.padding(.top, 10)
+        }
+        .padding(.top, 10)
         
-      
-            HStack {
-                Spacer()
-                Text(TextError)
+        
+        HStack {
+            Spacer()
+            Text(TextError)
                 .font(.system(size: 12))
                 .foregroundColor(.red)
                 .padding(.trailing)
                 .padding(.top, -2)
-            }
         }
+    }
     
-   
+    
 }
 

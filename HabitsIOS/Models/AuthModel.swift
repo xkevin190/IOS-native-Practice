@@ -58,6 +58,6 @@ struct AuthModel {
 
 extension AuthModel {
         static var new: AuthModel {
-            AuthModel(email: "", password: "" , step: 1, EmailError: false, visbleAlert: false)
+            AuthModel(email: "kevin@gmail.com", password: "" , step: 1, EmailError: false, visbleAlert: false)
         }
 }

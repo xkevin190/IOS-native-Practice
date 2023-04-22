@@ -8,26 +8,41 @@
 import SwiftUI
 
 struct Login: View {
-    
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     @ObservedObject var authViewModel = AuthViewModel()
+    
+    var titleAlert = "No te encuentras registrado"
+    
     var body: some View {
-        ZStack(alignment: .bottom) {
-            HeaderLoading();
-            BodyLoading(viewModel: authViewModel)
-            if authViewModel.authModel.visbleAlert {
-                CustomAlert(email: authViewModel.authModel.email, action: authViewModel.actionButton)
+        NavigationStack {
+            ZStack(alignment: .bottom) {
+                HeaderLoading(message: "Bienvenido a habis ✋");
+                BodyLoading(viewModel: authViewModel)
+                if authViewModel.authModel.visbleAlert {
+                    CustomAlert(action: {
+                        authViewModel.navigateToRegisterAction()
+                    },back: {
+                        authViewModel.hideAlert()
+                    }, title: titleAlert, message: "Tu correo ''\(authViewModel.authModel.email)'' no se encuentra registrado. Verifica si es un correo corporativo o si tiene algún error. Tambien puedes registrarte si tiene un Código QR" )
+                    .navigationDestination(
+                        isPresented: $authViewModel.navigateToRegister) {
+                            Register()
+                        }
+                }
             }
         }
+        .environmentObject(authViewModel)
     }
 }
 
 struct HeaderLoading:  View {
+    var message: String
     var body: some View {
         let backgroundColor = Color(hex: "#011223")
         let uiScreen = UIScreen.main.bounds.size
-            
+        
         VStack {
-            Text("Bienvenido a habits ✋")
+            Text(message)
                 .foregroundColor(Color.white)
                 .font(.largeTitle)
                 .padding(.top, 70)
@@ -42,7 +57,6 @@ struct HeaderLoading:  View {
 struct BodyLoading: View {
     
     @ObservedObject var viewModel: AuthViewModel;
-    
     let placeholder = "Correo Electronico" 
     let uiScreen = UIScreen.main.bounds.size
     
@@ -57,13 +71,12 @@ struct BodyLoading: View {
                     .padding(.horizontal)
                 
                 
-                Input(placeholder: placeholder, TextError: viewModel.authModel.emailPrompt , text: $viewModel.authModel.email)
+                Input(placeholder: placeholder, TextError: viewModel.authModel.emailPrompt, text: $viewModel.authModel.email, icon: "envelope")
                 
                 
                 if viewModel.authModel.step == 2 {
                     Input(placeholder: "Ingresa tu contraseña", TextError: "", secure: true, text: $viewModel.authModel.password)
                 }
-                
                 
                 AuthButton(callback: {
                     viewModel.verifyEmail()
@@ -80,12 +93,12 @@ struct BodyLoading: View {
                     .foregroundColor(.gray)
                 
                 
-                Button(action: {
-                    viewModel.actionButton()
-                }, label: {
+                NavigationLink(destination: Register()) {
                     Text("Registrate aquí").font(.system(size: 16))
+                }
+                .onDisappear(perform: {
+                    print("new changes!!!!! back")
                 })
-                
                 
                 Button(action: {
                     print("necesito ayuda")
@@ -99,10 +112,7 @@ struct BodyLoading: View {
                             .frame(width: 12, height: 12).padding(.leading, -2)
                     }
                 }).padding(.top)
-                
-                
                 Spacer()
-                
             }
             .frame(width: uiScreen.width, height: uiScreen.height * 0.8)
             .background(.white)
