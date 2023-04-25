@@ -14,6 +14,8 @@ struct QRorCodeRegister: View {
     
     let sizeOFButtom = UIScreen.main.bounds.width / 2.5
     @EnvironmentObject var model: AuthViewModel
+    @ObservedObject var  codeModel: CodeAuthViewModel = CodeAuthViewModel()
+    
     
     var scannerSheet: some View {
         
@@ -90,7 +92,7 @@ struct QRorCodeRegister: View {
                 if (!model.isPresentingCode) {
                     ChooseOption
                 } else {
-                    CodeRegister()
+                    CodeRegister(codeModel: codeModel)
                         .frame(
                             height: Screen.height * 0.8
                         )

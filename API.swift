@@ -17,11 +17,16 @@ class HTTPClient {
     }
     
     func sendRequest(url: String, method: String, body: NSDictionary?, completion: @escaping (Result<Data?, Error>) -> Void) {
-        let jsonData = try! JSONSerialization.data(withJSONObject: body as Any, options: [])
+
         var request = URLRequest(url: URL(string: url)!)
         request.httpMethod = method
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = jsonData
+        
+        if(method != "GET") {
+            let jsonData = try! JSONSerialization.data(withJSONObject: body as Any, options: [])
+            request.httpBody = jsonData
+        }
+        
         
         let task = session.dataTask(with: request) { data, response, error in
             if let error = error {

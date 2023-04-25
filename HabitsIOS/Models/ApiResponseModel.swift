@@ -9,7 +9,7 @@ import Foundation
 
 // Berisikan variable Response
 struct HTTPResponse<T: Codable>: Codable {
-    var status: Int
     var data: T?
-    var error: String?
+    var code: Int
+    var success: Bool
 }

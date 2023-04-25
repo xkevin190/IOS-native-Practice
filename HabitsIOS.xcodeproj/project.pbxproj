@@ -10,7 +10,11 @@
 		3410B10C29EC57090012F536 /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3410B10B29EC57090012F536 /* Register.swift */; };
 		3410B10E29EC628B0012F536 /* HeaderButtonBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3410B10D29EC628B0012F536 /* HeaderButtonBack.swift */; };
 		3428AE5429F2CC3B00845FC5 /* CodeRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3428AE5329F2CC3B00845FC5 /* CodeRegister.swift */; };
+		3434C0EC29F7412600CDE406 /* CompanyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3434C0EB29F7412600CDE406 /* CompanyModel.swift */; };
+		3434C0EE29F7413100CDE406 /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3434C0ED29F7413100CDE406 /* ImageModel.swift */; };
+		3434FA7229F4BA710076C6DF /* SelectOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3434FA7129F4BA710076C6DF /* SelectOption.swift */; };
 		3447CDA329DEFDEF00F9CC64 /* ApiResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3447CDA229DEFDEF00F9CC64 /* ApiResponseModel.swift */; };
+		344DC58A29F371B9008E01CD /* CodeAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344DC58929F371B9008E01CD /* CodeAuthViewModel.swift */; };
 		34696FE429F19F65008B1842 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 34696FE329F19F65008B1842 /* CodeScanner */; };
 		3472AC9229F0B2E40099F2B4 /* QRorCodeRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3472AC9129F0B2E40099F2B4 /* QRorCodeRegister.swift */; };
 		3490CD6E29D25EEB00C12FFE /* HabitsIOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3490CD6D29D25EEB00C12FFE /* HabitsIOSApp.swift */; };
@@ -32,7 +36,11 @@
 		3410B10B29EC57090012F536 /* Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
 		3410B10D29EC628B0012F536 /* HeaderButtonBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderButtonBack.swift; sourceTree = "<group>"; };
 		3428AE5329F2CC3B00845FC5 /* CodeRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeRegister.swift; sourceTree = "<group>"; };
+		3434C0EB29F7412600CDE406 /* CompanyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyModel.swift; sourceTree = "<group>"; };
+		3434C0ED29F7413100CDE406 /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
+		3434FA7129F4BA710076C6DF /* SelectOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectOption.swift; sourceTree = "<group>"; };
 		3447CDA229DEFDEF00F9CC64 /* ApiResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponseModel.swift; sourceTree = "<group>"; };
+		344DC58929F371B9008E01CD /* CodeAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeAuthViewModel.swift; sourceTree = "<group>"; };
 		3472AC9129F0B2E40099F2B4 /* QRorCodeRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRorCodeRegister.swift; sourceTree = "<group>"; };
 		3490CD6A29D25EEB00C12FFE /* HabitsIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HabitsIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3490CD6D29D25EEB00C12FFE /* HabitsIOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsIOSApp.swift; sourceTree = "<group>"; };
@@ -108,6 +116,8 @@
 			children = (
 				34D93DAA29D76BBF005E1539 /* AuthModel.swift */,
 				3447CDA229DEFDEF00F9CC64 /* ApiResponseModel.swift */,
+				3434C0EB29F7412600CDE406 /* CompanyModel.swift */,
+				3434C0ED29F7413100CDE406 /* ImageModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -125,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				34D93DAE29D76E8B005E1539 /* authViewModel.swift */,
+				344DC58929F371B9008E01CD /* CodeAuthViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -147,6 +158,7 @@
 				34F63DD029D3D61200429A0E /* AuthButton.swift */,
 				34A0B5F629E7265200AD2921 /* CustomAlert.swift */,
 				3410B10D29EC628B0012F536 /* HeaderButtonBack.swift */,
+				3434FA7129F4BA710076C6DF /* SelectOption.swift */,
 			);
 			path = SharedComponents;
 			sourceTree = "<group>";
@@ -232,12 +244,16 @@
 				34A0B5F729E7265200AD2921 /* CustomAlert.swift in Sources */,
 				34D93DAB29D76BBF005E1539 /* AuthModel.swift in Sources */,
 				3410B10C29EC57090012F536 /* Register.swift in Sources */,
+				3434C0EC29F7412600CDE406 /* CompanyModel.swift in Sources */,
 				3472AC9229F0B2E40099F2B4 /* QRorCodeRegister.swift in Sources */,
 				34A0B5F929E75AD200AD2921 /* Constants .swift in Sources */,
 				3490CD8029D266F200C12FFE /* Login.swift in Sources */,
+				3434FA7229F4BA710076C6DF /* SelectOption.swift in Sources */,
 				3410B10E29EC628B0012F536 /* HeaderButtonBack.swift in Sources */,
+				3434C0EE29F7413100CDE406 /* ImageModel.swift in Sources */,
 				34D93DAF29D76E8B005E1539 /* authViewModel.swift in Sources */,
 				3490CD7029D25EEB00C12FFE /* ContentView.swift in Sources */,
+				344DC58A29F371B9008E01CD /* CodeAuthViewModel.swift in Sources */,
 				3490CD6E29D25EEB00C12FFE /* HabitsIOSApp.swift in Sources */,
 				34FFDCD829DD05240063997E /* API.swift in Sources */,
 				3428AE5429F2CC3B00845FC5 /* CodeRegister.swift in Sources */,
