@@ -12,18 +12,20 @@ struct CodeRegister: View {
     @ObservedObject var codeModel: CodeAuthViewModel
     @State var empresa = ""
     
+    
     var body: some View {
         VStack(alignment: .leading) {
             
             ScrollView{
                 firtView
-                if codeModel.showOthersInputs {
+                if codeModel.companyModel._id == nil {
                     secondView
                 }
             }
             Spacer()
             
-        }.ignoresSafeArea(.keyboard, edges: .bottom)
+        }
+        .ignoresSafeArea(.keyboard, edges: .bottom)
     }
     
     
@@ -44,7 +46,7 @@ struct CodeRegister: View {
             
             Input(placeholder: "COD-123", TextError: "", text: $codeModel.code).padding(.top, -20)
                 .onChange(of: codeModel.code) { newValue in
-                    if(codeModel.code.count == 7) {
+                    if(codeModel.codeToSend.count == 7) {
                         codeModel.verifyCode()
                     } else {
                         codeModel.modifyCode(newValue: newValue.uppercased())
@@ -73,6 +75,10 @@ struct CodeRegister: View {
                 
                 Input(placeholder: "", TextError: "", text: $codeModel.companyModel.name).padding(.top, -20)
                 
+            }.onChange(of: codeModel.companyModel.name ) { _ in
+               let result = codeModel.getItemsArea()
+
+                print(result)
             }
             
             VStack(alignment:.leading) {
@@ -80,7 +86,7 @@ struct CodeRegister: View {
                     .foregroundColor(.black)
                     .padding(.top, 20)
                 
-                SelectOption().padding(.top, -10)
+                SelectOption(items: codeModel.getItemsArea()).padding(.top, -10)
                 
             }
             
@@ -89,9 +95,20 @@ struct CodeRegister: View {
                     .foregroundColor(.black)
                     .padding(.top, 20)
                 
-                SelectOption().padding(.top, -10)
+                SelectOption(items: codeModel.getItemsAge()).padding(.top, -10)
                 
-            }
+            }.padding(.bottom, 20)
+            
+            Button(action: {}, label: {
+                Text("Continuar")
+                    .foregroundColor(.white)
+                    .padding()
+                    
+                
+            })
+            .frame(width: UIScreen.main.bounds.width * 0.9)
+            .background(Colors.Background)
+            .cornerRadius(20)
             
         }
     }

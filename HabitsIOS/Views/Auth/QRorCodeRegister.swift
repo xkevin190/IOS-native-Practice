@@ -24,7 +24,7 @@ struct QRorCodeRegister: View {
                 print("result", result)
                 if case let .success(code) = result {
                     model.isPresentingQR = false
-                    print("code", code)
+
                 }
             })
         }

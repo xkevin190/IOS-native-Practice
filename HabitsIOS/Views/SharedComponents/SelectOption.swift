@@ -7,11 +7,22 @@
 
 import SwiftUI
 
+struct PickerModel: Hashable  {
+   var id: String
+   var label: String
+}
+
 struct SelectOption: View {
-    static var MockData: [String] = ["RH", "Other", "Other23","new Other", "bla", "black", "el MIo"]
+    var items: [PickerModel]
+    @State var selected: PickerModel
+    
+    init(items: [PickerModel]) {
+        self.items = items
+        self.selected = items.count > 0 ? items[0] : PickerModel(id: "Selected", label: "Selected")
+    }
     
     @State var ActivePicker = false
-    @State var selected = MockData[0]
+    
     
     var body: some View {
         
@@ -20,7 +31,7 @@ struct SelectOption: View {
         }, label: {
             VStack{
                 
-                Text(selected).padding(.vertical, 10).foregroundColor(.black).padding(.leading)
+                Text(selected.label).padding(.vertical, 10).foregroundColor(.black).padding(.leading)
             }
             .frame(width: UIScreen.main.bounds.width * 0.9, alignment: .leading)
             .background(.gray.opacity(0.3))
@@ -29,15 +40,15 @@ struct SelectOption: View {
         }).sheet(isPresented: $ActivePicker, content: {
             
             ScrollView(showsIndicators: false) {
-                ForEach(SelectOption.MockData, id: \.self) { item in
-                    var selectedColor = item == selected ? Color.gray : Color.white
+                ForEach(self.items, id: \.self) { val in
+                    let selectedColor = val.id == self.selected.id ? Color.gray : Color.white
                     
                     Button {
-                        selected = item
+                        selected = val
                         ActivePicker = false
                     } label: {
                         VStack {
-                            Text(item)
+                            Text(val.label)
                                 .foregroundColor(.black)
                                 .padding()
                         }
@@ -54,6 +65,6 @@ struct SelectOption: View {
 
 struct SelectOption_Previews: PreviewProvider {
     static var previews: some View {
-        SelectOption()
+        SelectOption(items: [PickerModel(id: "test", label: "test")])
     }
 }
